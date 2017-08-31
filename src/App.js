@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 //import {getEncounters} from './request.js';
 import axios from 'axios'; 
+import $ from 'jquery';
+
 
 
 class App extends Component {
@@ -23,8 +25,20 @@ class App extends Component {
     let encounters = response.data.encounters;
 
     for (var i = 0 ; i< encounters.length;i++ ){
-        console.log( encounters[i]);
-       
+        //console.log( encounters[i]);
+        // document.write(
+        //   "<br>"+"ID : "+encounters[i].id+
+        //   " DATE : "+encounters[i].date+
+        //   " ATYPE : "+encounters[i].atype+
+        //   " ACTION : "+encounters[i].action
+        //   );
+        //document.getElementById('container').innerHTML = "<br>"+"ID : "+encounters[i].id+" DATE : "+encounters[i].date+" ATYPE : "+encounters[i].atype+" ACTION : "+encounters[i].action;
+
+        $( ".container" ).append( 
+          "<br><br>"+"ID : "+encounters[i].id
+          +" DATE : "+encounters[i].date
+          +" ATYPE : "+encounters[i].atype+"<br>"
+          +" ACTION : "+encounters[i].action );
     }
 
     // const encComps = encounters.map((encounter)=>{
@@ -49,8 +63,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Fact fact={this.state.fact}/>
-      <div></div>  
+        <Fact fact={this.state.fact} />
+      <div className="container"></div>  
       </div>
     );
   }
