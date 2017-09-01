@@ -8,14 +8,43 @@ var ReactRouter = require('react-router-dom');
 var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
 
-
 class App extends Component {
-
 
  constructor(props){
     super(props);
-    this.state =({fact:"loading", encounters: []});
+    this.state =({encounter:"loading", encounters: []});
    
+  }
+
+  render(){
+   
+    return (
+
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Welcome to React</h2>
+        </div>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+        
+        <CheckIn />
+
+        <Encounters encounter={this.state.encounters} />
+       
+      </div>
+    );
+  }
+}
+
+
+//---------------Encounters-----------------
+
+class Encounters extends Component {
+  constructor(props){
+    super(props);
+    this.state =({encounters:[]});
   }
 
     componentDidMount(){
@@ -31,8 +60,10 @@ class App extends Component {
   });
   }
 
+
   render(){
-    let encounters = this.state.encounters;
+
+     let encounters = this.state.encounters;
     let mappedEncounters = encounters.map(encounter => 
     <div class="getEncounter">
       <p> {"(Date :) "+encounter.date 
@@ -42,35 +73,14 @@ class App extends Component {
      </div>
     
     );
-    return (
-
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-          {mappedEncounters}
-        </p>
-        <Fact fact={this.state.fact} />
-        <CheckIn />
-       
-      </div>
-    );
-  }
-}
 
 
-class Fact extends Component {
-  constructor(props){
-    super(props);
-    
-  }
-  render(){
     return(
     <div>
-        <div> {this.props.fact} </div>
+        <div> 
+        {mappedEncounters} 
+        <button>Report Encounter</button>
+        </div>
     </div>
     );
   }
@@ -78,7 +88,7 @@ class Fact extends Component {
 }
 
 
-//---------------form and input------------------------------
+//---------------form and input-----------------
 
 class CheckIn extends Component {
   constructor(props) {
@@ -93,8 +103,6 @@ class CheckIn extends Component {
   
     let  theKey = event.target.name + "value";
     let value = event.target.value;
-
-    console.log(theKey, value);
     this.setState({[theKey] : value }); //will re-render the box evey time because using setState
   }
 
