@@ -17,13 +17,11 @@ class App extends Component {
   }
 
   render(){
-   
     return (
-
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to Mars</h2>
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
@@ -38,17 +36,16 @@ class App extends Component {
   }
 }
 
+//---------------Report-----------------
 
-//---------------Encounters-----------------
-
-class Encounters extends Component {
+class Report extends Component {
   constructor(props){
     super(props);
     this.state =({encounters:[]});
   }
 
     componentDidMount(){
-    axios.get('https://red-wdp-api.herokuapp.com/api/mars/encounters')
+    axios.get('https://red-wdp-api.herokuapp.com/api/mars/aliens')
     .then((response) => {
     let data = response.data.encounters;
     this.setState({encounters: data});
@@ -88,16 +85,76 @@ class Encounters extends Component {
 }
 
 
+//---------------Encounters-----------------
+
+class Encounters extends Component {
+  constructor(props){
+    super(props);
+    this.state =({encounters:[]});
+  }
+
+    componentDidMount(){
+    axios.get('https://red-wdp-api.herokuapp.com/api/mars/encounters')
+    .then((response) => {
+    let data = response.data.encounters;
+    this.setState({encounters: data});
+
+  })
+
+  .catch(function (error) {
+    console.log(error);
+  });
+  }
+
+
+  render(){
+
+    let encounters = this.state.encounters;
+    let mappedEncounters = encounters.map(encounter => 
+    <div class="getEncounter">
+      <p> {"(Date :) "+encounter.date 
+       +"  (ID :) "+ encounter.id  
+       + " (Atype :) "+ encounter.atype 
+       + " (Action :) "+ encounter.action } </p>
+     </div>
+    
+    );
+
+
+    return(
+    <div>
+        <div> 
+        {mappedEncounters} 
+        <button>Report Encounter</button>
+        </div>
+    </div>
+    );
+  }
+
+}
+
+
 //---------------form and input-----------------
 
 class CheckIn extends Component {
   constructor(props) {
     super(props);
-    this.state = {namevalue: '',agevalue: '',jobvalue: ''};
+    this.state = {namevalue: '',agevalue: '',jobvalue: '',jobs:[]};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+
+  componentDidMount(){
+    axios.get('https://red-wdp-api.herokuapp.com/api/mars/jobs')
+    .then((response) => {
+    let jobs = response.data.jobs;
+    this.setState({jobs});
+
+    })
+  }
+
 
   handleChange(event) { //event handler that is called from text field on each click
   
@@ -112,6 +169,15 @@ class CheckIn extends Component {
   }
 
   render() {
+
+    let jobs = this.state.jobs;
+    let mappedjobs = jobs.map(job => 
+    
+      <option value={job.name}>{job.name}</option>
+    
+    
+    );
+
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
@@ -127,6 +193,15 @@ class CheckIn extends Component {
           Job:
           <input name="job" type="text" value={this.state.jobvalue} onChange={this.handleChange} />
         </label>
+
+
+         
+          
+          <select>
+            {mappedjobs}
+          </select>
+        
+
         <input type="submit" value="Submit" />
       </form>
     );
