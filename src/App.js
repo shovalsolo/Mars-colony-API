@@ -28,7 +28,7 @@ class App extends Component {
         </p>
         
         <CheckIn />
-
+        <Report />
         <Encounters encounter={this.state.encounters} />
        
       </div>
@@ -41,14 +41,14 @@ class App extends Component {
 class Report extends Component {
   constructor(props){
     super(props);
-    this.state =({encounters:[]});
+    this.state =({aliens:[]});
   }
 
     componentDidMount(){
     axios.get('https://red-wdp-api.herokuapp.com/api/mars/aliens')
     .then((response) => {
-    let data = response.data.encounters;
-    this.setState({encounters: data});
+    let aliens = response.data.aliens;
+    this.setState({aliens});
 
   })
 
@@ -60,25 +60,29 @@ class Report extends Component {
 
   render(){
 
-     let encounters = this.state.encounters;
-    let mappedEncounters = encounters.map(encounter => 
-    <div class="getEncounter">
-      <p> {"(Date :) "+encounter.date 
-       +"  (ID :) "+ encounter.id  
-       + " (Atype :) "+ encounter.atype 
-       + " (Action :) "+ encounter.action } </p>
-     </div>
+    let aliens = this.state.aliens;
+    let mappedaliens = aliens.map(alien => 
+
+    <option value={alien.type}>{alien.type}</option>
     
     );
 
 
     return(
-    <div>
-        <div> 
-        {mappedEncounters} 
-        <button>Report Encounter</button>
-        </div>
-    </div>
+      
+      <div>
+      <br/>
+      <p>Select alien type:</p>
+      <select>
+          {mappedaliens}
+      </select>
+      <br/><br/>
+           
+      Action taken:
+      <input name="action" type="text" value="Action taken" />
+      <br/>
+      <input type="submit" value="Submit Report" />
+      </div>
     );
   }
 
@@ -158,7 +162,7 @@ class CheckIn extends Component {
 
   handleChange(event) { //event handler that is called from text field on each click
   
-    let  theKey = event.target.name + "value";
+    let theKey = event.target.name + "value";
     let value = event.target.value;
     this.setState({[theKey] : value }); //will re-render the box evey time because using setState
   }
