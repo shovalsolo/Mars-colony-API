@@ -39,7 +39,7 @@ class Report extends Component {
     return(
       
       <div>
-      	<form>
+      	<form onSubmit={this.handleSubmit}>
 		      <br/>
 		      <p className="report-text">Select alien type:</p>
 		      <select>
