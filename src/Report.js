@@ -10,7 +10,7 @@ import './Report.css';
 class Report extends Component {
   constructor(props){
     super(props);
-    this.state =({aliens:[]});
+    this.state ={aliens:[] , actionvalue:''};
   }
 
     componentDidMount(){
@@ -21,11 +21,10 @@ class Report extends Component {
 
   })
 
-  .catch(function (error) {
-    console.log(error);
-  });
+	  .catch(function (error) {
+	    console.log(error);
+	  });
   }
-
 
   render(){
 
@@ -40,18 +39,20 @@ class Report extends Component {
     return(
       
       <div>
-      <br/>
-      <p className="report-text">Select alien type:</p>
-      <select>
-          {mappedaliens}
-      </select>
-      <br/><br/>
-           
-      <p className="report-text">Action taken:</p>
-      <input name="action" type="text" value="Action taken" />
-      <br/><br/>
-      <input type="submit" value="Submit Report" />
-      <br/><br/>
+      	<form>
+		      <br/>
+		      <p className="report-text">Select alien type:</p>
+		      <select>
+		          {mappedaliens}
+		      </select>
+		      <br/><br/>
+		           
+		      <p className="report-text">Action taken:</p>
+		      <input name="action" type="text" value={this.state.actionvalue} />
+		      <br/><br/>
+		      <input type="submit" value="Submit Report" />
+		      <br/><br/>
+		</form>
       </div>
     );
   }
