@@ -27,6 +27,7 @@ class App extends Component {
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to Mars</h2>
+            <br/>
           </div>
           
 
@@ -38,8 +39,6 @@ class App extends Component {
 
             <hr/>
           
-         
-
           <Route exact path="/" component={CheckIn}/>
           <Route path="/encounters" component={Encounters}/>
           <Route path="/report" component={Report}/>
