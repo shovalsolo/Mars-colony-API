@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
 import $ from 'jquery';
+import './Report.css';
 
 
 
@@ -40,16 +41,17 @@ class Report extends Component {
       
       <div>
       <br/>
-      <p>Select alien type:</p>
+      <p className="report-text">Select alien type:</p>
       <select>
           {mappedaliens}
       </select>
       <br/><br/>
            
-      Action taken:
+      <p className="report-text">Action taken:</p>
       <input name="action" type="text" value="Action taken" />
-      <br/>
+      <br/><br/>
       <input type="submit" value="Submit Report" />
+      <br/><br/>
       </div>
     );
   }

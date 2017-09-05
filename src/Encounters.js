@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
 import $ from 'jquery';
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import './App.css';
+import './Encounters.css';
 
 
 
@@ -42,10 +45,11 @@ class Encounters extends Component {
 
 
     return(
-    <div>
+    <div className="mappedEncounters ">
         <div> 
         {mappedEncounters} 
-        <button>Report Encounter</button>
+        
+        <Link to="/report"><button>Report Encounter</button></Link>
         </div>
     </div>
     );

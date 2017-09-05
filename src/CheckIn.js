@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
 import $ from 'jquery';
+import './App.css';
+import './Checkin.css';
 
 
 
@@ -50,31 +52,35 @@ class CheckIn extends Component {
     );
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-        <p>{this.state.namevalue}</p>
-          Name:
-          <input name="name" type="text" value={this.state.namevalue} onChange={this.handleChange} />
-        </label>
-        <label>
-          Age:
-          <input name="age" type="text" value={this.state.agevalue} onChange={this.handleChange} />
-        </label>
-        <label>
-          Job:
-          <input name="job" type="text" value={this.state.jobvalue} onChange={this.handleChange} />
-        </label>
+    	<div className="checkin-div">
+	      <form onSubmit={this.handleSubmit}>
+	        <label>
+	          <p className="span_text">Name:</p>
+	          <input name="name" type="text" value={this.state.namevalue} onChange={this.handleChange} />
+	        </label>
+	        <br/>
+	        
+	        <label>
+	          <p className="span_text">Age:</p>
+	          <input name="age" type="text" value={this.state.agevalue} onChange={this.handleChange} />
+	        </label>
+	        <br/>
 
-
-         
-          
-          <select>
-            {mappedjobs}
-          </select>
-        
-
-        <input type="submit" value="Submit" />
-      </form>
+	        <label>
+	          <p className="span_text">Job:</p>
+	          <input name="job" type="text" value={this.state.jobvalue} onChange={this.handleChange} />
+	        </label>
+			<br/><br/>	        
+	 
+	          <select>
+	            {mappedjobs}
+	          </select>
+	          <br/><br/>
+	        
+	        <input type="submit" value="Submit" />
+	        <br/><br/>
+	      </form>
+	    </div>
     );
   }
 }

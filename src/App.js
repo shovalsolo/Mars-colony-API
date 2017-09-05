@@ -6,10 +6,11 @@ import $ from 'jquery';
 import Report from './Report';
 import Encounters from './Encounters';
 import CheckIn from './CheckIn';
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 
 var ReactRouter = require('react-router-dom');
-var Router = ReactRouter.BrowserRouter;
-var Route = ReactRouter.Route;
+//var Router = ReactRouter.BrowserRouter;
+//var Route = ReactRouter.Route;
 
 class App extends Component {
 
@@ -21,20 +22,29 @@ class App extends Component {
 
   render(){
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Mars</h2>
+      <Router>
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>Welcome to Mars</h2>
+          </div>
+          
+
+          <ul className="nav">
+            <li><Link to="/">Home to Check In</Link></li>
+            <li><Link to="/encounters">See all Encounters</Link></li>
+            <li><Link to="/report">Report an Encounter</Link></li>
+          </ul>
+
+            <hr/>
+          
+         
+
+          <Route exact path="/" component={CheckIn}/>
+          <Route path="/encounters" component={Encounters}/>
+          <Route path="/report" component={Report}/>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        
-        <CheckIn />
-        <Report />
-        <Encounters encounter={this.state.encounters} />
-       
-      </div>
+      </Router>
     );
   }
 }
