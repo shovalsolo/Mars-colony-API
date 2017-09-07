@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'; 
-import $ from 'jquery';
+
 import Report from './Report';
 import Encounters from './Encounters';
 import CheckIn from './CheckIn';
