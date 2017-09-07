@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
-import $ from 'jquery';
+
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import './App.css';
 import './Encounters.css';
